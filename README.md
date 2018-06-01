@@ -41,8 +41,7 @@ Trigger: when a caching system has saved the request
 
 #### executedErc20Transfer
 
-Trigger: when an instance has proved that the transfer is valid and executed. Caching 
-systems should now remove this from cache and all database systems can save the new data
+Trigger: when an instance has proved that the transfer is valid and executed. Caching systems should now remove this from cache and all database systems can save the new data
 as truth. 
 
 #### failedErc20Transfer (OOS)
@@ -51,15 +50,22 @@ Trigger: when an instance has proved that the ERC20 transfer request is not vali
 impossible. 
 
 Additional data: 
-- message: contains the error message explaining why this system deemed this 
-transaction invalid
+- errorMessage: contains the error message explaining why this system deemed this transaction invalid
 
 ### Status and maintenance
 
-#### status
+#### requestStatus
 
 Trigger: when an instance wants to see the version of all instances listening to the hub. 
 Note that these must be implemented on listeners in order for the hub to notices them. 
+
+#### requestVersion 
+
+Trigger: when an instance wants to know the version of all instances listening to the hub. 
+
+#### status
+
+Trigger: when an instance receives the `requestStatus` event, is has to send this event.
 
 Additional data: 
 - statusCode: can be "_OK_" if the instance is doing fine, "_ERROR_" if the server is 
@@ -70,7 +76,7 @@ Additional data:
 
  #### version
 
- Trigger: when an instance wants to know the version of all instances listening to the hub. 
+Trigger: when an instance receives the `requestVersion` event, it has to send this event.
 
  Additional data:
  - release: first part of version index
