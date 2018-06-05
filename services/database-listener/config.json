@@ -1,6 +1,0 @@
-{
-    "eventHub": {
-        "connectionString": "Endpoint=sb://forus-concept.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=NBGdOS2cTt2f+QvWIhzMD8tKiMk/muihUiCaj+0HnY4=",
-        "eventHubName": "concept-1.0"
-    }
-}
