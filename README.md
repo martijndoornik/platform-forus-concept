@@ -20,7 +20,7 @@ All events contain a header, made from the event name and event data (eventName 
 In the eventData, the following data kan be found, although sometimes optional. 
 
 - previousEvent: the event that caused this event. Note that the previous event can also contain a previous event, creating a stacktrace;
-- source: the source of the event (to be determined what this will be: IP, URI, identifier known by instances);
+- sender: the source of the event (to be determined what this will be: IP, URI, identifier known by instances);
 - timestamp: timestamp on which the event was called on;
 
 ### ERC20 - Transfer

@@ -1,4 +1,5 @@
 
+const listenerId = 'database-listener';
 const release = 0;
 const patch = 1;
 const hotfix = 0;
@@ -8,8 +9,7 @@ const eventHub = require('event-hub');
 const events = require('event-list');
 const dataList = events.Data;
 
-function onEvent(eventName, eventData) {
-    console.log(eventName);
+function onEvent(eventName, eventData, time) {
     try {
         switch (eventName) {
             case events.STATUS_REQUEST:
@@ -22,13 +22,15 @@ function onEvent(eventName, eventData) {
                 console.log(eventData);
                 break;
             case events.VERSION_REQUEST:
+                /*const previous = {};
+                previous
                 data = {}
                 data[dataList.VERSION_RELEASE] = release;
                 data[dataList.VERSION_PATCH] = patch;
                 data[dataList.VERSION_HOTFIX] = hotfix; 
-                eventHub.send(events.VERSION_RESPONSE, data).then(() => {
-                    console.log('event sent');
-                });
+                eventHub.send(events.VERSION_RESPONSE, data).catch((reason) => {
+                    console.log(reason);
+                });*/
         }
     } catch (error) {
         console.log(error);
@@ -48,9 +50,7 @@ function onInput(i) {
     }
     else if (input === 'version') {
         console.log('Sending event to hub...')
-        eventHub.send(events.VERSION_REQUEST).then((e) => {
-            console.log("Event send :)");  
-        }).catch((reason) => {
+        eventHub.send(events.VERSION_REQUEST).catch((reason) => {
             console.log(reason);
         });
     } else {
@@ -59,7 +59,7 @@ function onInput(i) {
 }
 
 // Start actual process
-eventHub.configure(config);
+eventHub.configure(config, require('./package.json'));
 eventHub.start(onEvent);
 console.log('Server ready. Now listing for commands...');
 console.log('Type "help" for help.')
